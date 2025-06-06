@@ -1,0 +1,12 @@
+@startuml deployment
+node "Web Server" {
+  component "HTML" as HTML
+  component "CSS" as CSS
+  component "JS" as JS
+}
+
+database "Images" as IMG
+HTML --> CSS
+HTML --> JS
+JS --> IMG
+@enduml

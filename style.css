@@ -1,0 +1,240 @@
+:root {
+    --bg-main: #0F0F12;
+    --bg-secondary: #1A1A21;
+    --accent-red: #FF3347;
+    --text-primary: #F5F5F7;
+    --text-secondary: #8E8E93;
+    --gradient-red: linear-gradient(135deg, #FF1A1A 0%, #8B0000 100%);
+    --border-dark: #2D2D36;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.page-transition {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+img {
+    width: 700px;
+    height: 550px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 1rem auto;
+    display: block;
+}
+
+.progress-bar {
+    height: 3px;
+    background: var(--gradient-red);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: width 0.3s ease;
+}
+
+header {
+    background: var(--bg-secondary);
+    padding: 4rem 2rem;
+    text-align: center;
+    border-bottom: 3px solid var(--accent-red);
+}
+
+.header-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: var(--gradient-red);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+nav {
+    background: rgba(26, 26, 33, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1.5rem;
+    list-style: none;
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+nav a.active,
+nav a:hover {
+    background: var(--gradient-red);
+    color: white !important;
+}
+
+.achievement-card {
+    background: var(--bg-secondary);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.btn-more {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--gradient-red);
+    color: white !important;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.btn-more:hover {
+    transform: translateY(-2px);
+}
+
+.gg-footer {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .header-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Специфичные стили */
+.cybertruck-specs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: left;
+}
+
+.energy-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.ai-projects {
+    border-left: 3px solid var(--accent-red);
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.hyperloop-scheme {
+    width: 100%;
+    max-width: 600px;
+}
+/* Специфичные стили для Tesla Energy */
+.energy-card {
+    max-width: 900px;
+}
+
+.energy-specs {
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.energy-list {
+    list-style: none;
+    padding: 0;
+}
+
+.energy-list li {
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background: var(--border-dark);
+    border-radius: 8px;
+}
+
+.timeline-card {
+    max-width: 1000px;
+}
+
+.timeline-content {
+    padding: 2rem;
+}
+
+.timeline-list {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline-list li {
+    margin: 1.2rem 0;
+    padding: 1rem;
+    border-left: 3px solid var(--accent-red);
+    background: rgba(255, 51, 71, 0.05);
+}
+/* Стили для презентационных карточек */
+.presentation-card {
+    border: 3px solid var(--accent-red);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    background: var(--bg-secondary);
+    box-shadow: 0 0 20px rgba(255, 51, 71, 0.1);
+}
+
+.presentation-card h2 {
+    color: var(--accent-red);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.presentation-card ul {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+.presentation-card li {
+    margin: 1rem 0;
+    padding: 0.8rem;
+    border-left: 3px solid var(--accent-red);
+    background: rgba(255, 51, 71, 0.05);
+}

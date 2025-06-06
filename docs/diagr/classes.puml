@@ -1,0 +1,11 @@
+@startuml classes
+actor "User" as User
+rectangle "Сайт" {
+  usecase "Просмотр биографии" as UC1
+  usecase "Изучение SpaceX" as UC2
+  usecase "Навигация" as UC3
+}
+User --> UC1
+User --> UC2
+User --> UC3
+@enduml
