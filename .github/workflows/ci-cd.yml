@@ -1,0 +1,79 @@
+name: CI / CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# Job 1: build image and push to registry
+jobs:
+  build-and-push:
+    name: Build and push Docker image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write    # если пушите в GHCR
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU (for multi-arch, optional)
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Login to registry: two options shown (uncomment one)
+      - name: Login to Docker Hub
+        if: env.USE_GHCR != 'true'
+        uses: docker/login-action@v2
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to GitHub Container Registry (GHCR)
+        if: env.USE_GHCR == 'true'
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          # set tags you want; example for Docker Hub and GHCR:
+          tags: |
+            docker.io/${{ secrets.DOCKERHUB_USERNAME }}/sait:latest
+            ghcr.io/${{ github.repository_owner }}/sait:latest
+          platforms: linux/amd64
+
+  # Job 2: deploy static files to GitHub Pages
+  deploy-pages:
+    name: Deploy to GitHub Pages
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Adjust path if your site files live in a subfolder (e.g. ./public or ./docs)
+      - name: Upload site artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: .    # <-- поменяйте если сайт в ./docs или ./public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1

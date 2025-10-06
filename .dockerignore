@@ -1,0 +1,23 @@
+# Node / dev
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Git / CI / configs
+.git
+.github
+.env
+.env.local
+
+# Docker / build artefacts
+Dockerfile*
+docker-compose*.yml
+
+# VS / dotnet / build
+*.sln
+*.csproj
+bin
+obj
+
+# Misc
+*.md
